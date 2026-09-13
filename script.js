@@ -1,0 +1,3 @@
+function przywitaj() {
+    alert("Cześć! 👋");
+}
