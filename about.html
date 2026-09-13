@@ -78,37 +78,13 @@ footer{margin-top:70px;padding-top:25px;border-top:1px solid var(--border);color
 </div></section>
 
 <section><h2>Dokąd zmierzam</h2><div class="card"><p>Naturalnym kolejnym krokiem jest połączenie doświadczenia technicznego z odpowiedzialnością za ludzi i produkt: <strong>Team Lead, Manager, Product Owner lub rola architektoniczno-liderska</strong>.</p>
-<p class="muted">Lubię rozwiązywać trudne problemy techniczne, ale równie ważne jest dla mnie uporządkowanie sposobu pracy zespołu i doprowadzenie projektu od pomysłu do działającego rozwiązania.</p><a class="detail-link" href="sections/experience/future-direction.html">Szczegóły →</a></div></section>
+<p class="muted">Lubię rozwiązywać trudne problemy techniczne, ale równie ważne jest dla mnie uporządkowanie sposobu pracy zespołu i doprowadzenie projektu od pomysłu do działającego rozwiązania.</p></div></section>
 
 <footer>© 2026 Michael · C# / .NET / Business Applications · <a href="project.html">Zobacz projekty →</a></footer>
 </div>
 <script>
   const cards = document.querySelectorAll('.card');
   const timelineItems = document.querySelectorAll('.timeline .item');
-  const detailLinks = {
-    'Programowanie': 'sections/strengths/programming.html',
-    'Integracje': 'sections/strengths/integrations.html',
-    'Automatyzacja': 'sections/strengths/automation.html',
-    'Systemy enterprise': 'sections/strengths/enterprise.html',
-    'Architektura': 'sections/strengths/architecture.html',
-    'Biznes': 'sections/strengths/business.html',
-    'Ekspert ds. Rozwoju i Wsparcia Aplikacji Biznesowych': 'sections/experience/business-applications.html',
-    'OpenText Captiva / Enterprise IT': 'sections/experience/captiva-enterprise.html',
-    'Integracje i aplikacje .NET': 'sections/experience/dotnet-integrations.html'
-  };
-
-  document.querySelectorAll('.card, .timeline .item').forEach((element) => {
-    const title = element.querySelector('h3')?.textContent.trim();
-    const target = detailLinks[title];
-    if (!target) return;
-    const link = document.createElement('a');
-    link.className = 'detail-link';
-    link.href = target;
-    link.textContent = 'Szczegóły →';
-    link.addEventListener('click', (event) => event.stopPropagation());
-    element.appendChild(link);
-  });
-
   cards.forEach((card) => {
     card.classList.add('expandable-card');
 
