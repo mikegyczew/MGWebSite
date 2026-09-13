@@ -1,45 +1,8 @@
 <!doctype html>
 <html lang="pl"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Michael — Projekty</title><style>
-:root{
-  --bg:#0b1020; --card:#121a2e; --card2:#18223b; --text:#eef2ff;
-  --muted:#aab5d0; --accent:#65d6ff; --accent2:#8b7cff; --border:#263352;
-}
-*{box-sizing:border-box}
-body{margin:0;background:linear-gradient(135deg,#090d19,#101a31);color:var(--text);
-font-family:Inter,Segoe UI,Arial,sans-serif;line-height:1.65}
-a{color:var(--accent);text-decoration:none}
-a:hover{text-decoration:underline}
-.container{max-width:1100px;margin:auto;padding:32px 22px 70px}
-nav{display:flex;justify-content:space-between;align-items:center;padding:8px 0 35px}
-.logo{font-weight:800;letter-spacing:.5px}
-.navlinks{display:flex;gap:22px}
-.hero{padding:55px 0 45px;display:grid;grid-template-columns:1.5fr 1fr;gap:35px;align-items:center}
-.kicker{color:var(--accent);font-weight:700;text-transform:uppercase;letter-spacing:2px;font-size:13px}
-h1{font-size:clamp(42px,6vw,72px);line-height:1.02;margin:14px 0 20px}
-h2{font-size:30px;margin:0 0 18px}
-h3{margin:0 0 8px;font-size:19px}
-.lead{font-size:20px;color:var(--muted);max-width:720px}
-.card{background:rgba(18,26,46,.82);border:1px solid var(--border);border-radius:18px;padding:24px}
-.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
-.two{grid-template-columns:repeat(2,1fr)}
-section{margin-top:55px}
-.project-card{cursor:pointer;transition:transform .2s ease, box-shadow .2s ease, background .2s ease;}
-.project-card:hover{transform:translateY(-2px);box-shadow:0 12px 28px rgba(15,23,42,.35)}
-.project-card.expanded{position:fixed;inset:20px;z-index:1000;width:auto;height:auto;max-width:none;max-height:none;overflow:auto;padding:40px;background:rgba(11,16,32,.98);border:1px solid var(--border);box-shadow:0 30px 80px rgba(0,0,0,.55)}
-.project-card.expanded h3{font-size:clamp(28px,3vw,42px);margin-bottom:18px}
-.project-card.expanded p{font-size:1.08rem}
-.project-card.expanded .tags{margin-top:20px}
-body.card-expanded{overflow:hidden}
-.tags{display:flex;flex-wrap:wrap;gap:8px;margin-top:14px}
-.tag{background:#1b2743;border:1px solid #30405f;padding:5px 10px;border-radius:999px;color:#cbd6ef;font-size:13px}
-.muted{color:var(--muted)}
-.number{font-size:36px;font-weight:800;color:var(--accent)}
-footer{margin-top:70px;padding-top:25px;border-top:1px solid var(--border);color:var(--muted)}
-@media(max-width:800px){.hero,.grid,.two{grid-template-columns:1fr}.navlinks{gap:10px;font-size:14px}.hero{padding-top:25px}.project-card.expanded{inset:10px;padding:24px}}
-</style></head>
+<title>Michael — Projekty</title><link rel="stylesheet" href="../common.css"></head>
 <body><div class="container">
-<nav><div class="logo">MICHAEL / PROJECTS</div><div class="navlinks"><a href="about.html">O mnie</a><a href="project.html">Projekty</a></div></nav>
+<nav><div class="logo">MICHAEL / PROJECTS</div><div class="navlinks"><a href="../about/about.html">O mnie</a><a href="project.html">Projekty</a></div></nav>
 <div class="hero"><div><div class="kicker">Portfolio</div><h1>Projekty, systemy i rozwiązania.</h1>
 <p class="lead">Zestawienie projektów i obszarów technicznych, które przewijają się przez moje doświadczenie zawodowe.</p></div>
 <div class="card"><div class="number">20+</div><p class="muted">projektów, systemów, narzędzi i inicjatyw technicznych zidentyfikowanych na podstawie mojego doświadczenia.</p></div></div>
@@ -77,27 +40,7 @@ footer{margin-top:70px;padding-top:25px;border-top:1px solid var(--border);color
 <div class="card"><h3>Skalowanie aplikacji Blazor</h3><p>Rozważanie architektury dla wielu klientów i wielu instancji backendu, w tym SignalR, stan aplikacji i Load Balancer.</p></div>
 </div></section>
 
-<footer>© 2026 Michael · <a href="about.html">← O mnie</a></footer>
+<footer>© 2026 Michael · <a href="../about/about.html">← O mnie</a></footer>
 </div>
-<script>
-  const projectCards = document.querySelectorAll('section .card');
-  projectCards.forEach((card) => {
-    card.classList.add('project-card');
-
-    card.addEventListener('click', () => {
-      const isOpen = card.classList.contains('expanded');
-
-      projectCards.forEach((item) => {
-        item.classList.remove('expanded');
-      });
-
-      document.body.classList.remove('card-expanded');
-
-      if (!isOpen) {
-        card.classList.add('expanded');
-        document.body.classList.add('card-expanded');
-      }
-    });
-  });
-</script>
+<script src="../common.js"></script>
 </body></html>
