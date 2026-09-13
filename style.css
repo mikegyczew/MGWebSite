@@ -25,3 +25,83 @@ button {
     font-size: 16px;
     cursor: pointer;
 }
+
+.detail-page {
+    min-height: 100vh;
+    background: linear-gradient(135deg, #090d19, #101a31);
+    color: #eef2ff;
+    font-family: Inter, Segoe UI, Arial, sans-serif;
+}
+
+.detail-container {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 32px 22px 70px;
+}
+
+.detail-card {
+    margin-top: 70px;
+    padding: 36px;
+    background: rgba(18, 26, 46, .86);
+    border: 1px solid #263352;
+    border-radius: 18px;
+}
+
+.detail-card h1 {
+    margin-top: 0;
+    color: #eef2ff;
+}
+
+.detail-card p {
+    color: #aab5d0;
+    font-size: 18px;
+}
+
+.detail-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin: 24px 0;
+}
+
+.detail-tag {
+    padding: 5px 10px;
+    border: 1px solid #30405f;
+    border-radius: 999px;
+    background: #1b2743;
+    color: #cbd6ef;
+    font-size: 13px;
+}
+
+.content-list {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 18px;
+}
+
+.content-list .card {
+    transition: transform .2s ease, box-shadow .2s ease;
+}
+
+.content-list .card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 12px 28px rgba(15, 23, 42, .35);
+}
+
+.detail-link {
+    display: inline-block;
+    margin-top: 14px;
+    color: #65d6ff;
+    font-size: 14px;
+}
+
+@media (max-width: 800px) {
+    .detail-card {
+        margin-top: 35px;
+        padding: 24px;
+    }
+
+    .content-list {
+        grid-template-columns: 1fr;
+    }
+}

@@ -24,6 +24,17 @@ h3{margin:0 0 8px;font-size:19px}
 .grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
 .two{grid-template-columns:repeat(2,1fr)}
 section{margin-top:55px}
+.expandable-card{cursor:pointer;transition:transform .2s ease, box-shadow .2s ease, background .2s ease;}
+.expandable-card:hover{transform:translateY(-2px);box-shadow:0 12px 28px rgba(15,23,42,.35)}
+.expandable-card.expanded{position:fixed;inset:20px;z-index:1000;width:auto;height:auto;max-width:none;max-height:none;overflow:auto;padding:40px;background:rgba(11,16,32,.98);border:1px solid var(--border);box-shadow:0 30px 80px rgba(0,0,0,.55)}
+.expandable-card.expanded h3{font-size:clamp(28px,3vw,42px);margin-bottom:18px}
+.expandable-card.expanded p{font-size:1.08rem}
+.timeline .item{cursor:pointer;transition:transform .2s ease, box-shadow .2s ease, background .2s ease;}
+.timeline .item:hover{transform:translateY(-2px);box-shadow:0 12px 28px rgba(15,23,42,.35)}
+.timeline .item.expanded{position:fixed;inset:20px;z-index:1000;width:auto;height:auto;max-width:none;max-height:none;overflow:auto;padding:40px;background:rgba(11,16,32,.98);border:1px solid var(--border);box-shadow:0 30px 80px rgba(0,0,0,.55)}
+.timeline .item.expanded h3{font-size:clamp(28px,3vw,42px);margin-bottom:18px}
+.timeline .item.expanded p{font-size:1.08rem}
+body.card-expanded{overflow:hidden}
 .tags{display:flex;flex-wrap:wrap;gap:8px;margin-top:14px}
 .tag{background:#1b2743;border:1px solid #30405f;padding:5px 10px;border-radius:999px;color:#cbd6ef;font-size:13px}
 .timeline{border-left:2px solid var(--border);padding-left:25px}
@@ -32,7 +43,7 @@ section{margin-top:55px}
 .muted{color:var(--muted)}
 .number{font-size:36px;font-weight:800;color:var(--accent)}
 footer{margin-top:70px;padding-top:25px;border-top:1px solid var(--border);color:var(--muted)}
-@media(max-width:800px){.hero,.grid,.two{grid-template-columns:1fr}.navlinks{gap:10px;font-size:14px}.hero{padding-top:25px}}
+@media(max-width:800px){.hero,.grid,.two{grid-template-columns:1fr}.navlinks{gap:10px;font-size:14px}.hero{padding-top:25px}.expandable-card.expanded{inset:10px;padding:24px}}
 </style></head>
 <body><div class="container">
 <nav><div class="logo">MICHAEL / .NET</div><div class="navlinks"><a href="about.html">O mnie</a><a href="project.html">Projekty</a></div></nav>
@@ -67,7 +78,75 @@ footer{margin-top:70px;padding-top:25px;border-top:1px solid var(--border);color
 </div></section>
 
 <section><h2>Dokąd zmierzam</h2><div class="card"><p>Naturalnym kolejnym krokiem jest połączenie doświadczenia technicznego z odpowiedzialnością za ludzi i produkt: <strong>Team Lead, Manager, Product Owner lub rola architektoniczno-liderska</strong>.</p>
-<p class="muted">Lubię rozwiązywać trudne problemy techniczne, ale równie ważne jest dla mnie uporządkowanie sposobu pracy zespołu i doprowadzenie projektu od pomysłu do działającego rozwiązania.</p></div></section>
+<p class="muted">Lubię rozwiązywać trudne problemy techniczne, ale równie ważne jest dla mnie uporządkowanie sposobu pracy zespołu i doprowadzenie projektu od pomysłu do działającego rozwiązania.</p><a class="detail-link" href="sections/experience/future-direction.html">Szczegóły →</a></div></section>
 
 <footer>© 2026 Michael · C# / .NET / Business Applications · <a href="project.html">Zobacz projekty →</a></footer>
-</div></body></html>
+</div>
+<script>
+  const cards = document.querySelectorAll('.card');
+  const timelineItems = document.querySelectorAll('.timeline .item');
+  const detailLinks = {
+    'Programowanie': 'sections/strengths/programming.html',
+    'Integracje': 'sections/strengths/integrations.html',
+    'Automatyzacja': 'sections/strengths/automation.html',
+    'Systemy enterprise': 'sections/strengths/enterprise.html',
+    'Architektura': 'sections/strengths/architecture.html',
+    'Biznes': 'sections/strengths/business.html',
+    'Ekspert ds. Rozwoju i Wsparcia Aplikacji Biznesowych': 'sections/experience/business-applications.html',
+    'OpenText Captiva / Enterprise IT': 'sections/experience/captiva-enterprise.html',
+    'Integracje i aplikacje .NET': 'sections/experience/dotnet-integrations.html'
+  };
+
+  document.querySelectorAll('.card, .timeline .item').forEach((element) => {
+    const title = element.querySelector('h3')?.textContent.trim();
+    const target = detailLinks[title];
+    if (!target) return;
+    const link = document.createElement('a');
+    link.className = 'detail-link';
+    link.href = target;
+    link.textContent = 'Szczegóły →';
+    link.addEventListener('click', (event) => event.stopPropagation());
+    element.appendChild(link);
+  });
+
+  cards.forEach((card) => {
+    card.classList.add('expandable-card');
+
+    card.addEventListener('click', () => {
+      const isOpen = card.classList.contains('expanded');
+
+      cards.forEach((item) => item.classList.remove('expanded'));
+      timelineItems.forEach((item) => item.classList.remove('expanded'));
+      document.body.classList.remove('card-expanded');
+
+      if (!isOpen) {
+        card.classList.add('expanded');
+        document.body.classList.add('card-expanded');
+      }
+    });
+  });
+
+  timelineItems.forEach((item) => {
+    item.addEventListener('click', () => {
+      const isOpen = item.classList.contains('expanded');
+
+      cards.forEach((card) => card.classList.remove('expanded'));
+      timelineItems.forEach((entry) => entry.classList.remove('expanded'));
+      document.body.classList.remove('card-expanded');
+
+      if (!isOpen) {
+        item.classList.add('expanded');
+        document.body.classList.add('card-expanded');
+      }
+    });
+  });
+
+  document.addEventListener('keydown', (event) => {
+    if (event.key === 'Escape') {
+      cards.forEach((item) => item.classList.remove('expanded'));
+      timelineItems.forEach((item) => item.classList.remove('expanded'));
+      document.body.classList.remove('card-expanded');
+    }
+  });
+</script>
+</body></html>
