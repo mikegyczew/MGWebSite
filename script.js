@@ -1,3 +1,3 @@
 function przywitaj() {
-    alert("Cześć! 👋");
+    alert("Cześć ANIU G. Zostałaś nominowana to testowwania! 👋");
 }
