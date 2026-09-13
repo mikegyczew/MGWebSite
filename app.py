@@ -173,7 +173,7 @@ class SiteHandler(BaseHTTPRequestHandler):
         path = unquote(urlparse(self.path).path)
 
         if path in ("/", "/index.html"):
-            self.serve_file("index.html", send_body=send_body)
+            self.redirect_to("/about.html")
             return
 
         if path.startswith("/api/"):
@@ -185,6 +185,16 @@ class SiteHandler(BaseHTTPRequestHandler):
             return
 
         self.send_error(404, "Not found")
+
+    def redirect_to(self, target):
+        body = f"<html><head><meta http-equiv='refresh' content='0; url={target}'></head><body><a href='{target}'>Przejdź do strony</a></body></html>".encode("utf-8")
+        self.send_response(302)
+        self.send_header("Location", target)
+        self.send_header("Content-Type", "text/html; charset=utf-8")
+        self.send_header("Content-Length", str(len(body)))
+        self.end_headers()
+        if body:
+            self.wfile.write(body)
 
     def serve_api(self, path, send_body=True):
         endpoint = path.replace("/api/", "", 1)
